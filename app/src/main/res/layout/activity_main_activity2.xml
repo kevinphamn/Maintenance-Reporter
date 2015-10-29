@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.example.cse110.map.MainActivity2Activity">
+
+    <AutoCompleteTextView
+        android:id="@+id/buildingName"
+        android:hint="Building Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="45dp"
+        android:layout_below="@+id/problem"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/roomNumber"
+        android:hint="Room Number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLength="5"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/buildingName"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/takePhoto"
+        android:text="Photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/picture" />
+
+    <Button
+        android:id="@+id/report"
+        android:text="Report"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/takePhoto"
+        android:layout_toRightOf="@+id/picture"
+        android:layout_toEndOf="@+id/picture" />
+
+    <ImageView
+        android:id="@+id/picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/takePhoto"
+        android:layout_toEndOf="@+id/takePhoto"
+        android:layout_below="@+id/roomNumber"
+        android:layout_alignLeft="@+id/takePhoto"
+        android:layout_alignStart="@+id/takePhoto" />
+
+    <EditText
+        android:id="@+id/problem"
+        android:hint="Problem Description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textAlignment="center"
+        android:scrollbars = "vertical"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
