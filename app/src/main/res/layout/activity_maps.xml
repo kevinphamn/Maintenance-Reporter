@@ -10,6 +10,7 @@ xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/map" tools:context=".MapsActivity"
             android:name="com.google.android.gms.maps.SupportMapFragment"/>
         <Button
+            android:id="@+id/toReport"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/button_report" />
