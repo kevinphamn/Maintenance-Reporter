@@ -29,8 +29,8 @@
     <Button
         android:id="@+id/takePhoto"
         android:text="Photo"
-        android:layout_width="90dp"
-        android:layout_height="40dp"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
         android:layout_alignTop="@+id/picture"
         android:layout_centerHorizontal="true"
         android:background="@drawable/button_custom"
@@ -39,8 +39,8 @@
     <Button
         android:id="@+id/report"
         android:text="Report"
-        android:layout_width="90dp"
-        android:layout_height="40dp"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
         android:layout_below="@+id/takePhoto"
         android:layout_alignLeft="@+id/takePhoto"
         android:layout_alignStart="@+id/takePhoto"
