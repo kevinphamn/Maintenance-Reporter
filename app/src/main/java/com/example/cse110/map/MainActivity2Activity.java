@@ -31,7 +31,7 @@ import java.io.InputStream;
 
 import com.parse.ParseObject;
 
-public class MainActivity2Activity extends ActionBarActivity {
+public class MainActivity2Activity extends AppCompatActivity{
 
     String[] buildings = {"102 Marshall College", "Applied Physics and Mathematics","Center Hall",
             "Cognitive Science Building","Copley International Conference Center","Galbraith Hall",
@@ -76,7 +76,7 @@ public class MainActivity2Activity extends ActionBarActivity {
         final EditText problem = (EditText) findViewById(R.id.problem);
         final AutoCompleteTextView auto = (AutoCompleteTextView) findViewById(R.id.buildingName);
         final Button report = (Button) findViewById(R.id.report);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, buildings);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, buildings);
         auto.setThreshold(1);
         auto.setAdapter(adapter);
 
@@ -144,7 +144,7 @@ public class MainActivity2Activity extends ActionBarActivity {
                 checker(problem, room, auto, report);
                 for(int i=0; i<buildings.length; i++){
                     if(buildings[i].equals(auto.getText().toString())){
-                        ArrayAdapter<String> user = new ArrayAdapter<String>(MainActivity2Activity.this, android.R.layout.simple_list_item_1, roomNumbers[i]);
+                        ArrayAdapter<String> user = new ArrayAdapter<>(MainActivity2Activity.this, android.R.layout.simple_list_item_1, roomNumbers[i]);
                         room.setThreshold(1);
                         room.setAdapter(user);
                     }
