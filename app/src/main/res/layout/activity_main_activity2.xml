@@ -31,8 +31,8 @@
         android:text="Photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/picture" />
+        android:layout_alignTop="@+id/picture"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/report"
@@ -40,8 +40,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/takePhoto"
-        android:layout_toRightOf="@+id/picture"
-        android:layout_toEndOf="@+id/picture" />
+        android:layout_alignLeft="@+id/takePhoto"
+        android:layout_alignStart="@+id/takePhoto" />
 
     <ImageView
         android:id="@+id/picture"

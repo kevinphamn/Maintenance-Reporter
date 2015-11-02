@@ -17,6 +17,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.parse.ParseObject;
+
 public class MainActivity2Activity extends ActionBarActivity {
 
     String[] buildings = {"102 Marshall College", "Applied Physics and Mathematics","Center Hall",
@@ -42,6 +44,25 @@ public class MainActivity2Activity extends ActionBarActivity {
             public void onClick(View v) {
                 Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, 1);
+            }
+        });
+
+        Button reportButton = (Button) findViewById(R.id.report);
+        reportButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                EditText descriptionText = (EditText) findViewById(R.id.problem);
+                EditText buildingText = (EditText) findViewById(R.id.buildingName);
+                EditText numberText = (EditText) findViewById(R.id.roomNumber);
+                String problemString = descriptionText.getText().toString();
+                String buildingString = buildingText.getText().toString();
+                String numberString = numberText.getText().toString();
+
+                ParseObject newReport = new ParseObject("DataPoint");
+                newReport.put("reportDescription", problemString);
+                newReport.put("Building", buildingString);
+                newReport.put("RoomNumber", numberString);
+                newReport.saveInBackground();
+
             }
         });
     }
@@ -77,4 +98,5 @@ public class MainActivity2Activity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
