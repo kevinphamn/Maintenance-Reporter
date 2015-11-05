@@ -8,7 +8,7 @@
 
     <ImageView
         android:layout_width="fill_parent"
-        android:layout_height="100"
+        android:layout_height="100dp"
         android:id="@+id/imageView"
         android:background="#d0d6db"
         android:layout_alignParentLeft="true"
@@ -20,7 +20,6 @@
         android:layout_width="match_parent"
         android:layout_height="140dp"
         android:id="@+id/imageView2"
-        android:background="@drawable/PictureBoarder"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
@@ -29,6 +28,7 @@
         android:layout_below="@+id/textView"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+    <!--android:background="@drawable/PictureBoarder"-->
 
     <AutoCompleteTextView
         android:id="@+id/buildingName"
@@ -123,13 +123,13 @@
         android:layout_alignBottom="@+id/imageButton" />
 
     <ImageButton
-        android:layout_width="40"
-        android:layout_height="40"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:id="@+id/imageButton"
-        android:background="@drawable/BackArrow"
         android:layout_marginLeft="5dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+    <!--android:background="@drawable/BackArrow"-->
 </RelativeLayout>
 
