@@ -6,15 +6,41 @@
     android:fitsSystemWindows="true"
     tools:context="com.example.cse110.map.MainActivity2Activity">
 
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="100"
+        android:id="@+id/imageView"
+        android:background="#d0d6db"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentBottom="true" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:id="@+id/imageView2"
+        android:background="@drawable/PictureBoarder"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_alignLeft="@+id/imageButton"
+        android:layout_alignStart="@+id/imageButton"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
     <AutoCompleteTextView
         android:id="@+id/buildingName"
         android:hint="Building Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:layout_marginTop="45dp"
-        android:layout_below="@+id/problem"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/imageView2"
+        android:layout_alignLeft="@+id/imageView2"
+        android:layout_alignStart="@+id/imageView2"
+        android:layout_toLeftOf="@+id/roomNumber"
+        android:layout_toStartOf="@+id/roomNumber" />
 
     <AutoCompleteTextView
         android:id="@+id/roomNumber"
@@ -23,28 +49,35 @@
         android:layout_height="wrap_content"
         android:maxLength="5"
         android:gravity="center_horizontal"
-        android:layout_below="@+id/buildingName"
-        android:layout_centerHorizontal="true"/>
+        android:layout_alignTop="@+id/buildingName"
+        android:layout_alignRight="@+id/imageView2"
+        android:layout_alignEnd="@+id/imageView2" />
 
     <Button
         android:id="@+id/takePhoto"
-        android:text="Photo"
-        android:layout_width="110dp"
-        android:layout_height="50dp"
-        android:layout_alignTop="@+id/picture"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/button_custom"
-        />
+        android:text="Touch to add picture"
+        android:layout_width="298dp"
+        android:layout_height="103dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_alignTop="@+id/imageView2"
+        android:layout_alignLeft="@+id/imageView2"
+        android:layout_alignStart="@+id/imageView2" />
 
     <Button
         android:id="@+id/report"
         android:text="Report"
         android:layout_width="110dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/takePhoto"
-        android:layout_alignLeft="@+id/takePhoto"
-        android:layout_alignStart="@+id/takePhoto"
-        android:background="@drawable/button_custom"/>
+        android:background="#173753"
+        android:textColor="#c9bba4"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="25dp"
+        android:typeface="serif" />
 
     <ImageView
         android:id="@+id/picture"
@@ -64,7 +97,39 @@
         android:gravity="center_horizontal"
         android:textAlignment="center"
         android:scrollbars = "vertical"
+        android:layout_below="@+id/roomNumber"
+        android:layout_alignLeft="@+id/imageView2"
+        android:layout_alignStart="@+id/imageView2"
+        android:layout_alignRight="@+id/roomNumber"
+        android:layout_alignEnd="@+id/roomNumber" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Report a Problem"
+        android:id="@+id/textView"
+        android:textSize="25dp"
+        android:gravity='center'
+        android:textIsSelectable="false"
+        android:background="#173753"
+        android:textColor="#c9bba4"
+        android:typeface="serif"
+        android:textAlignment="center"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/imageButton" />
+
+    <ImageButton
+        android:layout_width="40"
+        android:layout_height="40"
+        android:id="@+id/imageButton"
+        android:background="@drawable/BackArrow"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
 
