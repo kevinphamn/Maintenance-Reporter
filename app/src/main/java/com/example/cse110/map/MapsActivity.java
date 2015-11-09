@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -13,8 +14,15 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.vision.barcode.Barcode;
+import com.parse.FindCallback;
 import com.parse.Parse;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseException;
+
+import java.util.List;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -64,5 +72,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng priceCenter = new LatLng(32.8799127, -117.2393386);
         //mMap.addMarker(new MarkerOptions().position(priceCenter).title("priceCenter"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom((priceCenter), 14));
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("DataPoint");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                if (e == null) {
+                    for (ParseObject entries : objects) {
+                        ParseGeoPoint geolocation = entries.getParseGeoPoint("Location");
+                        double latitude = geolocation.getLatitude();
+                        double longitude = geolocation.getLongitude();
+                        LatLng location = new LatLng(latitude, longitude);
+                        String name = entries.getString("Building");
+                        mMap.addMarker(new MarkerOptions().position(location).title(name));
+                    }
+                } else {
+                    Log.d("data", "Error: " + e.getMessage());
+                }
+            }
+        });
     }
 }

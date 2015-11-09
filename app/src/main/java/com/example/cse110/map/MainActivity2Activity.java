@@ -22,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -65,10 +66,11 @@ public class MainActivity2Activity extends AppCompatActivity{
     sequoahRooms, socialSciencesRooms, solisRooms, wlhRooms, yorkRooms};
 
     ImageView image;
+    boolean isCorrect = false;
     boolean canBePressed=false;
     Bitmap photo;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+        protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_activity2);
 
@@ -97,8 +99,8 @@ public class MainActivity2Activity extends AppCompatActivity{
 
                     Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 
-                    String choose="Chose from gallery or take new";
-                    Intent theIntent = Intent.createChooser(myIntent,choose);
+                    String choose = "Chose from gallery or take new";
+                    Intent theIntent = Intent.createChooser(myIntent, choose);
                     theIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{cameraIntent});
 
                     startActivityForResult(theIntent, 1);
@@ -148,6 +150,15 @@ public class MainActivity2Activity extends AppCompatActivity{
                         room.setThreshold(1);
                         room.setAdapter(user);
                     }
+                }
+                for(int i = 0; i<buildings.length;i++){
+                    if(room.getText().toString().equals(buildings[i])){
+                        isCorrect = true;
+                    }
+                }
+                if(!isCorrect){
+                    room.setText("");
+                    isCorrect = false;
                 }
             }
 
