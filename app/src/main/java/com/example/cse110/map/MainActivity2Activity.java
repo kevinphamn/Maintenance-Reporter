@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -40,7 +41,7 @@ public class MainActivity2Activity extends AppCompatActivity{
 
     String[] buildings = {"102 Marshall College", "Applied Physics and Mathematics","Center Hall",
             "Cognitive Science Building","Copley International Conference Center","Galbraith Hall",
-            "Humanities and Social SciencesBuilding","Ledden Auditorium","Mandeville Center",
+            "Humanities and Social Sciences Building","Ledden Auditorium","Mandeville Center",
             "McGill Hall","Pepper Canyon Hall","Peterson Hall","Price Center West","Robinson Building 2",
             "Sequoyah Hall","Social Sciences Building","Solis Hall","Warren Lecture Hall","York Hall"};
     String[] marshallRooms ={"1"};
@@ -176,8 +177,7 @@ public class MainActivity2Activity extends AppCompatActivity{
             }
         });
 
-        Button reportButton = (Button) findViewById(R.id.report);
-        reportButton.setOnClickListener(new View.OnClickListener() {
+        report.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 EditText descriptionText = (EditText) findViewById(R.id.problem);
                 EditText buildingText = (EditText) findViewById(R.id.buildingName);
@@ -210,14 +210,30 @@ public class MainActivity2Activity extends AppCompatActivity{
         });
     }
 
-    public void checker(EditText a, AutoCompleteTextView b, AutoCompleteTextView c, Button d){
-        if (!a.getText().toString().equals("") && !b.getText().toString().equals("") &&
-                !c.getText().toString().equals("")) {
-            d.setBackgroundColor(Color.parseColor("#0000FF"));
-            canBePressed=true;
-        } else {
-            d.setBackgroundColor(Color.parseColor("#FFFFFF"));
-            canBePressed=false;
+    public void checker(EditText problem, AutoCompleteTextView room, AutoCompleteTextView auto,
+                        Button report) {
+        boolean checker = false;
+        if (!problem.getText().toString().equals("")) {
+            for (int x = 0; x < buildings.length; x++) {
+                if (auto.getText().toString().equals(buildings[x])) {
+                    for (int y = 0; y < roomNumbers[x].length; y++) {
+                        if (room.getText().toString().equals(roomNumbers[x][y])) {
+                            checker = true;
+                        }
+                    }
+                }
+            }
+            if (checker) {
+                report.setBackgroundColor(Color.parseColor("#0000FF"));
+                canBePressed = true;
+            } else {
+                report.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                canBePressed = false;
+            }
+        }
+        else{
+            report.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            canBePressed = false;
         }
     }
 
