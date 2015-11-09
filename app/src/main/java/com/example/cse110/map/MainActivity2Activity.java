@@ -224,7 +224,7 @@ public class MainActivity2Activity extends AppCompatActivity{
                 }
             }
             if (checker) {
-                report.setBackgroundColor(Color.parseColor("#0000FF"));
+                report.setBackgroundColor(Color.parseColor("#173753"));
                 canBePressed = true;
             } else {
                 report.setBackgroundColor(Color.parseColor("#FFFFFF"));
