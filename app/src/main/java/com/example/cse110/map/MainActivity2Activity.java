@@ -30,7 +30,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 public class MainActivity2Activity extends AppCompatActivity{
 
@@ -38,7 +42,7 @@ public class MainActivity2Activity extends AppCompatActivity{
             "Cognitive Science Building","Copley International Conference Center","Galbraith Hall",
             "Humanities and Social SciencesBuilding","Ledden Auditorium","Mandeville Center",
             "McGill Hall","Pepper Canyon Hall","Peterson Hall","Price Center West","Robinson Building 2",
-            "Sequoah Hall","Social Sciences Building","Solis Hall","Warren Lecture Hall","York Hall"};
+            "Sequoyah Hall","Social Sciences Building","Solis Hall","Warren Lecture Hall","York Hall"};
     String[] marshallRooms ={"1"};
     String[] apmRooms ={"2301"};
     String[] centerRooms ={"101","105","109","113","115","119","201","202","203","204","205","206","207",
@@ -178,15 +182,29 @@ public class MainActivity2Activity extends AppCompatActivity{
                 EditText descriptionText = (EditText) findViewById(R.id.problem);
                 EditText buildingText = (EditText) findViewById(R.id.buildingName);
                 EditText numberText = (EditText) findViewById(R.id.roomNumber);
-                String problemString = descriptionText.getText().toString();
-                String buildingString = buildingText.getText().toString();
-                String numberString = numberText.getText().toString();
+                final String problemString = descriptionText.getText().toString();
+                final String buildingString = buildingText.getText().toString();
+                final String numberString = numberText.getText().toString();
 
-                ParseObject newReport = new ParseObject("DataPoint");
-                newReport.put("reportDescription", problemString);
-                newReport.put("Building", buildingString);
-                newReport.put("RoomNumber", numberString);
-                newReport.saveInBackground();
+                final ParseObject newReport = new ParseObject("DataPoint");
+                ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Buildings");
+                query.whereEqualTo("bldgLongName", buildingString);
+                query.getFirstInBackground(new GetCallback<ParseObject>() {
+                    @Override
+                    public void done(ParseObject object, ParseException e) {
+                        if (object == null) {
+                            Log.d("building", "The getFirst request failed.");
+                        } else {
+                            ParseGeoPoint bldLoc = object.getParseGeoPoint("location");
+                            newReport.put("Location", bldLoc);
+                            newReport.put("reportDescription", problemString);
+                            newReport.put("Building", buildingString);
+                            newReport.put("RoomNumber", numberString);
+                            newReport.saveInBackground();
+                        }
+                    }
+                });
+
 
             }
         });
