@@ -1,11 +1,15 @@
 package com.example.cse110.map;
 
 import android.content.Intent;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -30,12 +34,14 @@ import android.widget.LinearLayout;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ByteArrayOutputStream;
 
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseFile;
 
 public class MainActivity2Activity extends AppCompatActivity{
 
@@ -179,6 +185,11 @@ public class MainActivity2Activity extends AppCompatActivity{
 
         report.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                // Set up vibration on button click -- Can remove if no like
+                Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                vib.vibrate(100);
+
+                // Setup variables to create report in done()
                 EditText descriptionText = (EditText) findViewById(R.id.problem);
                 EditText buildingText = (EditText) findViewById(R.id.buildingName);
                 EditText numberText = (EditText) findViewById(R.id.roomNumber);
@@ -186,26 +197,45 @@ public class MainActivity2Activity extends AppCompatActivity{
                 final String buildingString = buildingText.getText().toString();
                 final String numberString = numberText.getText().toString();
 
+                // Creating OutputStream and photograph to add pic to report in done()
+                final ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                final ImageView photograph = image;
+
+                // Setup Parse Query to get coordinates and create a new report
                 final ParseObject newReport = new ParseObject("DataPoint");
                 ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Buildings");
                 query.whereEqualTo("bldgLongName", buildingString);
+
+                // Query to create a new report
                 query.getFirstInBackground(new GetCallback<ParseObject>() {
                     @Override
                     public void done(ParseObject object, ParseException e) {
                         if (object == null) {
+                            // Nothing found by query with same bldgLongName, log failure.
                             Log.d("building", "The getFirst request failed.");
                         } else {
+                            // Object found by query, create report
                             ParseGeoPoint bldLoc = object.getParseGeoPoint("location");
                             newReport.put("Location", bldLoc);
                             newReport.put("reportDescription", problemString);
                             newReport.put("Building", buildingString);
                             newReport.put("RoomNumber", numberString);
+
+                            //Check if a photo was taken
+                            if(photograph.getHeight() != -1) {
+
+                                //Convert photo to usable format and put in newReport
+                                Bitmap photoBitmap = ((BitmapDrawable) photograph.getDrawable()).getBitmap();
+                                photoBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                                byte[] pngPhoto = stream.toByteArray();
+                                ParseFile photoFile = new ParseFile("image.png", pngPhoto);
+                                newReport.put("photo", photoFile);
+                            }
+                            //Save report to parse database
                             newReport.saveInBackground();
                         }
                     }
                 });
-
-
             }
         });
     }
