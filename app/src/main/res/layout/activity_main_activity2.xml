@@ -4,29 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/activity_main_activity_2_background"
     tools:context="com.example.cse110.map.MainActivity2Activity">
 
     <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="100dp"
-        android:id="@+id/imageView"
-        android:background="#d0d6db"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentBottom="true" />
-
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="@dimen/activity2_photo_size"
+        android:layout_height="@dimen/activity2_photo_size"
         android:id="@+id/picture"
         android:layout_below="@+id/problem"
         android:layout_centerHorizontal="true"
-        android:layout_margin="15dp"
-        android:maxHeight="150dp"
-        android:maxWidth="150dp"
-        />
-    <!--android:background="@drawable/PictureBoarder"-->
+        android:layout_margin="@dimen/fab_margin"
+        android:maxHeight="@dimen/activity2_photo_size"
+        android:maxWidth="@dimen/activity2_photo_size" />
 
     <AutoCompleteTextView
         android:id="@+id/buildingName"
@@ -35,62 +24,45 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:singleLine="true"
-        android:layout_below="@+id/takePhoto"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        />
+        android:layout_marginTop="@dimen/activity2_margin"
+        android:layout_marginLeft="@dimen/activity2_margin"
+        android:layout_marginRight="@dimen/activity2_margin"
+        android:textSize="@dimen/activity2_input_text_size"/>
 
     <AutoCompleteTextView
         android:id="@+id/roomNumber"
         android:hint="Room Number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity2_margin"
+        android:textSize="@dimen/activity2_input_text_size"
         android:layout_below="@id/buildingName"
         android:layout_alignLeft="@id/buildingName"
         android:layout_alignRight="@id/buildingName"
-        android:maxLength="5"
         android:gravity="center_horizontal"
         android:singleLine="true"
         />
 
     <Button
-        android:id="@+id/takePhoto"
-        android:text="Touch to add picture"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:drawableBottom="@android:drawable/ic_menu_camera"
-        android:background="#173753"
-        android:textColor="#c9bba4"
-        android:layout_marginLeft="90dp"
-        android:layout_marginRight="90dp"
-        android:layout_marginTop="20dp"
-        android:layout_alignLeft="@+id/imageButton"
-        android:layout_alignStart="@+id/imageButton"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
         android:id="@+id/report"
         android:text="Report"
-        android:layout_width="110dp"
-        android:layout_height="50dp"
-        android:background="#FFFFFF"
-        android:textColor="#c9bba4"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginTop="@dimen/activity2_margin"
+        android:background="@color/white"
+        android:textColor="@color/reportTextColor"
         android:layout_below="@id/picture"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textSize="25dp"
+        android:textSize="@dimen/button_text_size"
         android:typeface="serif" />
 
     <EditText
         android:id="@+id/problem"
         android:hint="Problem Description"
         android:layout_width="wrap_content"
-        android:layout_height="130dp"
+        android:layout_height="@dimen/activity2_problem_input_height"
+        android:layout_marginTop="@dimen/activity2_margin"
+        android:textSize="@dimen/activity2_input_text_size"
         android:gravity="center_horizontal"
         android:textAlignment="center"
         android:scrollbars = "vertical"
@@ -99,27 +71,8 @@
         android:layout_alignStart="@+id/buildingName"
         android:layout_alignRight="@+id/roomNumber"
         android:layout_alignEnd="@+id/roomNumber"
-        android:background="#ffffff"
-        android:maxHeight="130dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Report a Problem"
-        android:id="@+id/textView"
-        android:textSize="25dp"
-        android:gravity='center'
-        android:textIsSelectable="false"
-        android:background="#173753"
-        android:textColor="#c9bba4"
-        android:typeface="serif"
-        android:textAlignment="center"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-
+        android:background="@color/white"
+        android:maxHeight="@dimen/activity2_problem_input_height"/>
+-->
 </RelativeLayout>
 

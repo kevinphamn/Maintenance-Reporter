@@ -94,29 +94,6 @@ public class MainActivity2Activity extends AppCompatActivity{
         auto.setAdapter(adapter);
 
         image = (ImageView) findViewById(R.id.picture);
-        Button pictureButton = (Button) findViewById(R.id.takePhoto);
-
-            report.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    if (canBePressed) {
-                    }
-                }
-            });
-            pictureButton.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    Intent myIntent = new Intent();
-                    myIntent.setType("image/*");
-                    myIntent.setAction(Intent.ACTION_GET_CONTENT);
-
-                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-
-                    String choose = "Chose from gallery or take new";
-                    Intent theIntent = Intent.createChooser(myIntent, choose);
-                    theIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{cameraIntent});
-
-                    startActivityForResult(theIntent, 1);
-                }
-            });
 
         room.addTextChangedListener(new TextWatcher() {
             @Override
@@ -332,6 +309,19 @@ public class MainActivity2Activity extends AppCompatActivity{
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+        if(id == R.id.action_camera){
+            Intent myIntent = new Intent();
+            myIntent.setType("image/*");
+            myIntent.setAction(Intent.ACTION_GET_CONTENT);
+
+            Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+
+            String choose = "Chose from gallery or take new";
+            Intent theIntent = Intent.createChooser(myIntent, choose);
+            theIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{cameraIntent});
+
+            startActivityForResult(theIntent, 1);
+        }
         if (id == R.id.action_settings) {
             return true;
         }
