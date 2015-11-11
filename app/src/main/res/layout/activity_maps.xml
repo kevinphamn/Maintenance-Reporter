@@ -16,7 +16,10 @@ xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/toReport"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/button_report"
-            android:background="@drawable/button_custom"/>
+            android:text="@string/map_activity_rep_btn_txt"
+            android:background="@color/colorPrimary"
+            android:typeface="serif"
+            android:textSize="@dimen/button_text_size"
+            android:textColor="@color/reportTextColor"/>
 
 </LinearLayout>
