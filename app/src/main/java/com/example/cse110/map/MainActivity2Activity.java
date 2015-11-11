@@ -322,9 +322,6 @@ public class MainActivity2Activity extends AppCompatActivity{
 
             startActivityForResult(theIntent, 1);
         }
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
