@@ -47,7 +47,7 @@ public class MainActivity2Activity extends AppCompatActivity{
 
     String[] buildings = {"102 Marshall College", "Applied Physics and Mathematics","Center Hall",
             "Cognitive Science Building","Copley International Conference Center","Galbraith Hall",
-            "Humanities and Social Sciences Building","Ledden Auditorium","Mandeville Center",
+            "Humanities and Social Sciences","Ledden Auditorium","Mandeville Center",
             "McGill Hall","Pepper Canyon Hall","Peterson Hall","Price Center West","Robinson Building 2",
             "Sequoyah Hall","Social Sciences Building","Solis Hall","Warren Lecture Hall","York Hall"};
     String[] marshallRooms ={"1"};
@@ -95,8 +95,11 @@ public class MainActivity2Activity extends AppCompatActivity{
 
         image = (ImageView) findViewById(R.id.picture);
 
+        // Create Text Changed Listener for Room Input Field
         room.addTextChangedListener(new TextWatcher() {
+
             @Override
+            // Determine if info in text fields accurate for submission
             public void onTextChanged(CharSequence s, int start, int before,
                                       int count) {
                 checker(problem, room, auto, report);
@@ -111,7 +114,11 @@ public class MainActivity2Activity extends AppCompatActivity{
             public void afterTextChanged(Editable s) {
             }
         });
+
+        // Create Text Changed Listener for Problem Input Field
         problem.addTextChangedListener(new TextWatcher() {
+
+            // Determine if info in text fields accurate for submission
             @Override
             public void onTextChanged(CharSequence s, int start, int before,
                                       int count) {
@@ -127,24 +134,28 @@ public class MainActivity2Activity extends AppCompatActivity{
             public void afterTextChanged(Editable s) {
             }
         });
+
+        // Create Text Changed Listener for Building Input Field
         auto.addTextChangedListener(new TextWatcher() {
+
+            // Determine if info in text fields accurate for submission
             @Override
             public void onTextChanged(CharSequence s, int start, int before,
                                       int count) {
                 checker(problem, room, auto, report);
-                for(int i=0; i<buildings.length; i++){
-                    if(buildings[i].equals(auto.getText().toString())){
+                for (int i = 0; i < buildings.length; i++) {
+                    if (buildings[i].equals(auto.getText().toString())) {
                         ArrayAdapter<String> user = new ArrayAdapter<>(MainActivity2Activity.this, android.R.layout.simple_list_item_1, roomNumbers[i]);
                         room.setThreshold(1);
                         room.setAdapter(user);
                     }
                 }
-                for(int i = 0; i<buildings.length;i++){
-                    if(room.getText().toString().equals(buildings[i])){
+                for (int i = 0; i < buildings.length; i++) {
+                    if (room.getText().toString().equals(buildings[i])) {
                         isCorrect = true;
                     }
                 }
-                if(!isCorrect){
+                if (!isCorrect) {
                     room.setText("");
                     isCorrect = false;
                 }
@@ -160,7 +171,10 @@ public class MainActivity2Activity extends AppCompatActivity{
             }
         });
 
+        // Set up On Click Listener for Report Button
         report.setOnClickListener(new View.OnClickListener() {
+
+            // On button click, Submit report to Pars
             public void onClick(View v) {
                 // Set up vibration on button click -- Can remove if no like
                 Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -217,9 +231,12 @@ public class MainActivity2Activity extends AppCompatActivity{
         });
     }
 
+    // Check the validity of the text in problem, room, and building fields
     public void checker(EditText problem, AutoCompleteTextView room, AutoCompleteTextView auto,
                         Button report) {
         boolean checker = false;
+
+        // Loop through buildings and rooms to check validity of input
         if (!problem.getText().toString().equals("")) {
             for (int x = 0; x < buildings.length; x++) {
                 if (auto.getText().toString().equals(buildings[x])) {
@@ -230,16 +247,15 @@ public class MainActivity2Activity extends AppCompatActivity{
                     }
                 }
             }
-            if (checker) {
-                report.setBackgroundColor(Color.parseColor("#173753"));
-                canBePressed = true;
-            } else {
-                report.setBackgroundColor(Color.parseColor("#FFFFFF"));
-                canBePressed = false;
-            }
         }
-        else{
-            report.setBackgroundColor(Color.parseColor("#FFFFFF"));
+
+        if (checker) {
+            // Valid Input, Allow Report Button to be pressed
+            report.setBackgroundColor(Color.parseColor("#173753"));
+            canBePressed = true;
+        } else {
+            // Invalid Input, Don't Allow Report Button to be pressed
+            report.setBackgroundColor(Color.parseColor("#b7d7f3"));
             canBePressed = false;
         }
     }

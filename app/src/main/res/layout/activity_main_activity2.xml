@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@color/activity_main_activity_2_background"
+    android:background="#e6e6e6"
     tools:context="com.example.cse110.map.MainActivity2Activity">
 
     <ImageView
@@ -27,7 +27,8 @@
         android:layout_marginTop="@dimen/activity2_margin"
         android:layout_marginLeft="@dimen/activity2_margin"
         android:layout_marginRight="@dimen/activity2_margin"
-        android:textSize="@dimen/activity2_input_text_size"/>
+        android:textSize="@dimen/activity2_input_text_size"
+        android:background="@color/white"/>
 
     <AutoCompleteTextView
         android:id="@+id/roomNumber"
@@ -41,18 +42,21 @@
         android:layout_alignRight="@id/buildingName"
         android:gravity="center_horizontal"
         android:singleLine="true"
+        android:background="@color/white"
         />
 
     <Button
         android:id="@+id/report"
         android:text="Report"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/button_height"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity2_margin"
-        android:background="@color/white"
-        android:textColor="@color/reportTextColor"
+        android:background="@color/inactive_button_color"
+        android:textColor="@color/button_text_color"
         android:layout_below="@id/picture"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:textSize="@dimen/button_text_size"
         android:typeface="serif" />
 
@@ -71,8 +75,8 @@
         android:layout_alignStart="@+id/buildingName"
         android:layout_alignRight="@+id/roomNumber"
         android:layout_alignEnd="@+id/roomNumber"
-        android:background="@color/white"
+        android:background="@drawable/white_box"
         android:maxHeight="@dimen/activity2_problem_input_height"/>
--->
+
 </RelativeLayout>
 
