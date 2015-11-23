@@ -13,6 +13,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.parse.FindCallback;
@@ -84,6 +85,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         LatLng location = new LatLng(latitude, longitude);
                         String name = entries.getString("Building");
                         mMap.addMarker(new MarkerOptions().position(location).title(name));
+                        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                            @Override
+                            public boolean onMarkerClick(Marker marker) {
+                                Intent theIntent = new Intent(MapsActivity.this, MainActivity3Activity.class);
+                                theIntent.putExtra("buildingName",marker.getTitle());
+                                startActivity(theIntent);
+                                return true;
+                            }
+                        });
                     }
                 } else {
                     Log.d("data", "Error: " + e.getMessage());

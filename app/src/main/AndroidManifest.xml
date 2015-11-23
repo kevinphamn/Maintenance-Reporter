@@ -42,8 +42,14 @@
             android:name=".MainActivity2Activity"
             android:label="@string/title_activity_main_activity2"
             android:theme="@style/AppTheme"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
 
+        </activity>
+        <activity
+            android:name=".MainActivity3Activity"
+            android:label="Problems"
+            >
         </activity>
     </application>
 

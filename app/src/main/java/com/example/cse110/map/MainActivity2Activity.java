@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -84,6 +85,8 @@ public class MainActivity2Activity extends AppCompatActivity{
         protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_activity2);
+
+        //this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         final AutoCompleteTextView room = (AutoCompleteTextView) findViewById(R.id.roomNumber);
         final EditText problem = (EditText) findViewById(R.id.problem);
@@ -279,14 +282,10 @@ public class MainActivity2Activity extends AppCompatActivity{
                     }
                 }
 
-                Log.d("oiuytre","gjij");
                 if(camera) {
-                    Log.d("hepero","ewf");
                     if ( data != null) {
-                    Log.d("gingero", "ef");
                     //Bundle extras=data.getData();
                     photo = (Bitmap)data.getExtras().get("data");
-                    Log.d("ertyr", "ef");
                     }
 
                 }
@@ -297,7 +296,6 @@ public class MainActivity2Activity extends AppCompatActivity{
                         photo =  BitmapFactory.decodeStream(user);
                     } catch(FileNotFoundException e) {}
                 }
-                Log.d("etet","h");
                 image.setImageBitmap(photo);
                 image.getLayoutParams().width = 250;
                 image.getLayoutParams().height = 250;
