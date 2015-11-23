@@ -72,7 +72,7 @@ public class ExtraAdapter extends ArrayAdapter<ParseObject> {
                 theImage.setImageBitmap(bmp);
             }
             else{
-                //int drawableID = getContext().getResources().getIdentifier("pic_unavailable", "drawable", "R");
+                // Set image to the pic_unavailable drawable resource
                 theImage.setImageResource(R.drawable.pic_unavailable);
             }
         }
