@@ -213,11 +213,11 @@ public class MainActivity2Activity extends AppCompatActivity{
                             newReport.put("RoomNumber", numberString);
 
                             //Check if a photo was taken
-                            if(photograph.getHeight() != -1) {
+                            if(photograph.getDrawable() != null) {
 
                                 //Convert photo to usable format and put in newReport
-                                //Bitmap photoBitmap = ((BitmapDrawable) photograph.getDrawable()).getBitmap();
-                                //photoBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                                Bitmap photoBitmap = ((BitmapDrawable) photograph.getDrawable()).getBitmap();
+                                photoBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                                 byte[] pngPhoto = stream.toByteArray();
                                 ParseFile photoFile = new ParseFile("image.png", pngPhoto);
                                 newReport.put("photo", photoFile);
