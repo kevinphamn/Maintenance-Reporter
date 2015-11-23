@@ -23,7 +23,7 @@ public class ExtraAdapter extends ArrayAdapter<ParseObject> {
 
     private ArrayList<ParseObject> myObjects;
     private ParseFile photo;
-    private Bitmap bmp;
+    Bitmap bmp;
 
     public ExtraAdapter(Context context, int using, ArrayList<ParseObject> objects) {
         super(context, using, objects);
@@ -69,7 +69,6 @@ public class ExtraAdapter extends ArrayAdapter<ParseObject> {
                     }
 
                 });
-                theImage.setImageBitmap(bmp);
             }
             else{
                 // Set image to the pic_unavailable drawable resource
