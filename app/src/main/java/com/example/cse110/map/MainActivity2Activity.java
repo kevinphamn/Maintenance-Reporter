@@ -95,6 +95,16 @@ public class MainActivity2Activity extends AppCompatActivity{
 
         image = (ImageView) findViewById(R.id.picture);
 
+        // Room Listener so that a click elsewhere will hide the keyboard
+        room.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    hideKeyboard(v);
+                }
+            }
+        });
+
         // Create Text Changed Listener for Room Input Field
         room.addTextChangedListener(new TextWatcher() {
 
@@ -115,6 +125,16 @@ public class MainActivity2Activity extends AppCompatActivity{
             }
         });
 
+        // Problem Listener so that a click elsewhere will hide the keyboard
+        problem.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    hideKeyboard(v);
+                }
+            }
+        });
+
         // Create Text Changed Listener for Problem Input Field
         problem.addTextChangedListener(new TextWatcher() {
 
@@ -132,6 +152,16 @@ public class MainActivity2Activity extends AppCompatActivity{
 
             @Override
             public void afterTextChanged(Editable s) {
+            }
+        });
+
+        // Building Listener so that a click elsewhere will hide the keyboard
+        auto.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    hideKeyboard(v);
+                }
             }
         });
 
@@ -230,6 +260,12 @@ public class MainActivity2Activity extends AppCompatActivity{
                 });
             }
         });
+    }
+
+    // Hides the keyboard
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(MainActivity2Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     // Check the validity of the text in problem, room, and building fields
