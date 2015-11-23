@@ -207,6 +207,8 @@ public class MainActivity2Activity extends AppCompatActivity{
             // On button click, Submit report to Pars
             public void onClick(View v) {
                 // Set up vibration on button click -- Can remove if no like
+                if(!canBePressed)
+                    return;
                 Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vib.vibrate(100);
 
