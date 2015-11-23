@@ -47,8 +47,10 @@ public class ExtraAdapter extends ArrayAdapter<ParseObject> {
             TextView theProblem = (TextView) emptyView.findViewById(R.id.theProblem);
             final ImageView theImage = (ImageView) emptyView.findViewById(R.id.thePicture);
 
-            theRoom.setText((String)myObject.get("RoomNumber"));
-            theProblem.setText((String) myObject.get("reportDescription"));
+            theRoom.setText("Room Number: ");
+            theRoom.append((String)myObject.get("RoomNumber"));
+            theProblem.setText("Problem Description: ");
+            theProblem.append((String) myObject.get("reportDescription"));
             photo = myObject.getParseFile("photo");
             theImage.setImageDrawable(null);
             if(photo != null) {
@@ -68,6 +70,10 @@ public class ExtraAdapter extends ArrayAdapter<ParseObject> {
 
                 });
                 theImage.setImageBitmap(bmp);
+            }
+            else{
+                //int drawableID = getContext().getResources().getIdentifier("pic_unavailable", "drawable", "R");
+                theImage.setImageResource(R.drawable.pic_unavailable);
             }
         }
 
