@@ -23,7 +23,7 @@ public class ExtraAdapter extends ArrayAdapter<ParseObject> {
 
     private ArrayList<ParseObject> myObjects;
     private ParseFile photo;
-    Bitmap bmp;
+    Bitmap bmp = null;
 
     public ExtraAdapter(Context context, int using, ArrayList<ParseObject> objects) {
         super(context, using, objects);
@@ -56,12 +56,13 @@ public class ExtraAdapter extends ArrayAdapter<ParseObject> {
             if(photo != null) {
                 photo.getDataInBackground(new GetDataCallback() {
                     public void done(byte[] data, ParseException e) {
-                        if (e == null && data != null) {
+                        if (e == null) {
                             // Decode the Byte[] into bitmap
                             bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
                             // Set the Bitmap into the imageView
                             if(bmp != null) {
                                 theImage.setImageBitmap(bmp);
+                                bmp = null;
                             }
                         } else {
                             Log.d("test", "There was a problem downloading the data.");
