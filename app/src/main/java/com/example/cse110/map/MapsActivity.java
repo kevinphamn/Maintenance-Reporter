@@ -23,12 +23,12 @@ import com.parse.ParseQuery;
 import com.parse.ParseException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +77,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onInfoWindowClick(Marker marker) {
                 Intent intent = new Intent(MapsActivity.this, Main2Report.class);
+                String theBuilding = marker.getTitle();
+                intent.putExtra("buildingName",theBuilding);
                 startActivity(intent);
             }
         });
@@ -99,6 +101,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 }
                             }
                         }
+                        Collections.sort(rooms);
                         mMap.addMarker(new MarkerOptions()
                                 .position(location)
                                 .title(name)
