@@ -45,6 +45,14 @@
             android:screenOrientation="portrait">
 
         </activity>
+        <activity
+            android:name=".Main2Report"
+            android:label="@string/title_activity_reports"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
+
+        </activity>
+
     </application>
 
 </manifest>
