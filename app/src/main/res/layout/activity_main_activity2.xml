@@ -47,21 +47,6 @@
         android:background="@color/white"
         />
 
-    <Button
-        android:id="@+id/report"
-        android:text="Report"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity2_margin"
-        android:background="@color/inactive_button_color"
-        android:textColor="@color/button_text_color"
-        android:layout_below="@id/picture"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:textSize="@dimen/button_text_size"
-        android:typeface="serif" />
-
     <EditText
         android:id="@+id/problem"
         android:hint="Problem Description"
@@ -76,8 +61,22 @@
         android:layout_alignStart="@+id/buildingName"
         android:layout_alignRight="@+id/roomNumber"
         android:layout_alignEnd="@+id/roomNumber"
-        android:background="@drawable/white_box"
+        android:background="@color/white"
         android:maxHeight="@dimen/activity2_problem_input_height"/>
+
+    <Button
+        android:id="@+id/report"
+        android:text="Report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity2_margin"
+        android:background="@color/inactive_button_color"
+        android:textColor="@color/button_text_color"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:textSize="@dimen/button_text_size"
+        android:typeface="serif" />
 
 </RelativeLayout>
 
