@@ -42,38 +42,38 @@ public class ExtraAdapter extends ArrayAdapter<ParseObject> {
         ParseObject myObject = myObjects.get(position);
 
         if (myObject != null) {
+            if(myObject.getInt("count") > -3) {
+                TextView theRoom = (TextView) emptyView.findViewById(R.id.theRoomNumber);
+                TextView theProblem = (TextView) emptyView.findViewById(R.id.theProblem);
+                final ImageView theImage = (ImageView) emptyView.findViewById(R.id.thePicture);
 
-            TextView theRoom = (TextView) emptyView.findViewById(R.id.theRoomNumber);
-            TextView theProblem = (TextView) emptyView.findViewById(R.id.theProblem);
-            final ImageView theImage = (ImageView) emptyView.findViewById(R.id.thePicture);
-
-            theRoom.setText("Room Number: ");
-            theRoom.append((String)myObject.get("RoomNumber"));
-            theProblem.setText("Problem Description: ");
-            theProblem.append((String) myObject.get("reportDescription"));
-            photo = myObject.getParseFile("photo");
-            theImage.setImageDrawable(null);
-            if(photo != null) {
-                photo.getDataInBackground(new GetDataCallback() {
-                    public void done(byte[] data, ParseException e) {
-                        if (e == null) {
-                            // Decode the Byte[] into bitmap
-                            bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
-                            // Set the Bitmap into the imageView
-                            if(bmp != null) {
-                                theImage.setImageBitmap(bmp);
-                                bmp = null;
+                theRoom.setText("Room Number: ");
+                theRoom.append((String) myObject.get("RoomNumber"));
+                theProblem.setText("Problem Description: ");
+                theProblem.append((String) myObject.get("reportDescription"));
+                photo = myObject.getParseFile("photo");
+                theImage.setImageDrawable(null);
+                if (photo != null) {
+                    photo.getDataInBackground(new GetDataCallback() {
+                        public void done(byte[] data, ParseException e) {
+                            if (e == null) {
+                                // Decode the Byte[] into bitmap
+                                bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
+                                // Set the Bitmap into the imageView
+                                if (bmp != null) {
+                                    theImage.setImageBitmap(bmp);
+                                    bmp = null;
+                                }
+                            } else {
+                                Log.d("test", "There was a problem downloading the data.");
                             }
-                        } else {
-                            Log.d("test", "There was a problem downloading the data.");
                         }
-                    }
 
-                });
-            }
-            else{
-                // Set image to the pic_unavailable drawable resource
-                theImage.setImageResource(R.drawable.pic_unavailable);
+                    });
+                } else {
+                    // Set image to the pic_unavailable drawable resource
+                    theImage.setImageResource(R.drawable.pic_unavailable);
+                }
             }
         }
 
