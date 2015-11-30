@@ -53,7 +53,7 @@ public class ExtraAdapter extends ArrayAdapter<ParseObject> {
             if(photo != null) {
                 photo.getDataInBackground(new GetDataCallback() {
                     public void done(byte[] data, ParseException e) {
-                        if (e == null && data != null) {
+                        if (e == null) {
                             // Decode the Byte[] into bitmap
                             Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
                             // Set the Bitmap into the imageView

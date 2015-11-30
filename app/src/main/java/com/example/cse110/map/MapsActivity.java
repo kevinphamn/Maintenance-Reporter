@@ -100,7 +100,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         String name = entries.getString("Building");
                         for (ParseObject checker : objects) {
                             if (checker.getString("Building").equals(name)) {
-                                if(!rooms.contains(checker.getString("RoomNumber"))) {
+                                if((!rooms.contains(checker.getString("RoomNumber"))) && (checker.getNumber("count").intValue() > -3)) {
                                     rooms.add(checker.getString("RoomNumber"));
                                 }
                             }

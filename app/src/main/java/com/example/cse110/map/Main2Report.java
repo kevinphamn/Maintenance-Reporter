@@ -44,11 +44,11 @@ public class Main2Report extends AppCompatActivity {
                                 photo.getDataInBackground(new GetDataCallback() {
                                     public void done(byte[] data, ParseException e) {
                                         if (e == null) {
-                                            // Decode the Byte[] into bitmap
-                                            Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
-                                            // Set the Bitmap into the imageView
-                                            imageView.setImageBitmap(bmp);
-                                        } else {
+                                                // Decode the Byte[] into bitmap
+                                                Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
+                                                // Set the Bitmap into the imageView
+                                                imageView.setImageBitmap(bmp);
+                                            } else {
                                             Log.d("test", "There was a problem downloading the data.");
                                         }
                                     }

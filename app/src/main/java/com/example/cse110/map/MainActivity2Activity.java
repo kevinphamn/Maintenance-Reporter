@@ -246,6 +246,7 @@ public class MainActivity2Activity extends AppCompatActivity{
                             newReport.put("reportDescription", problemString);
                             newReport.put("Building", buildingString);
                             newReport.put("RoomNumber", numberString);
+                            newReport.put("count",0);
 
                             //Check if a photo was taken
                             if(photograph.getDrawable() != null) {
