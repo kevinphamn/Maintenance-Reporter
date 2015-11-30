@@ -38,5 +38,12 @@
         android:maxHeight="@dimen/activity2_photo_size"
         android:maxWidth="@dimen/activity2_photo_size"/>
 
-
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/theInvalidButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:layout_below="@+id/thePicture"
+        android:text="Fixed/Erroneous Report"/>
 </RelativeLayout>
