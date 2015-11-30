@@ -260,10 +260,10 @@ public class MainActivity2Activity extends AppCompatActivity{
                             }
                             //Save report to parse database
                             newReport.saveInBackground();
-                            finish();
                         }
                     }
                 });
+                finish();
             }
         });
     }
