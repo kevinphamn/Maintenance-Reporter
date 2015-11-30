@@ -38,5 +38,23 @@
         android:maxHeight="@dimen/activity2_photo_size"
         android:maxWidth="@dimen/activity2_photo_size"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm"
+        android:id="@+id/confirmButton"
+        android:layout_below="@+id/thePicture"
+        android:layout_alignLeft="@+id/theProblem"
+        android:layout_alignStart="@+id/theProblem" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Deny"
+        android:id="@+id/denyButton"
+        android:layout_below="@+id/thePicture"
+        android:layout_alignRight="@+id/theProblem"
+        android:layout_alignEnd="@+id/theProblem" />
+
 
 </RelativeLayout>
