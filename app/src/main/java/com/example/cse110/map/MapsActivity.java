@@ -106,11 +106,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             }
                         }
                         Collections.sort(rooms);
-                        mMap.addMarker(new MarkerOptions()
-                                .position(location)
-                                .title(name)
-                                .snippet("Rooms reported: " + rooms));
-                        rooms.clear();
+                        if(!rooms.isEmpty()) {
+                            mMap.addMarker(new MarkerOptions()
+                                    .position(location)
+                                    .title(name)
+                                    .snippet("Rooms reported: " + rooms));
+                            rooms.clear();
+                        }
                     }
                 }
                 else {
