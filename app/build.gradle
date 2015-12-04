@@ -26,11 +26,12 @@ dependencies {
     //compile 'com.google.android.gms:play-services:8.1.+'
     androidTestCompile 'com.jayway.android.robotium:robotium:5.5.3'
     compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.google.android.gms:play-services:8.3.0'
+    compile 'com.google.android.gms:play-services:7.8.0'
     compile 'com.android.support:design:23.1.1'
     compile 'com.parse:parse-android:1.10.3'
-    compile 'com.google.android.gms:play-services-ads:8.3.0'
-    compile 'com.google.android.gms:play-services-identity:8.3.0'
-    compile 'com.google.android.gms:play-services-gcm:8.3.0'
+    //compile 'com.google.android.gms:play-services-ads:8.3.0'
+    //compile 'com.google.android.gms:play-services-identity:8.3.0'
+    //compile 'com.google.android.gms:play-services-gcm:8.3.0'
     compile project(':robotium-solo-5.5.3')
+    compile project(':robotium-maps-master')
 }

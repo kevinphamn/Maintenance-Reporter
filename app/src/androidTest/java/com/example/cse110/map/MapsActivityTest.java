@@ -1,8 +1,28 @@
 package com.example.cse110.map;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.robotium.solo.Solo;
 import junit.framework.Assert;
+
+import android.app.Activity;
+import android.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+
 import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
+import android.widget.EditText;
+
+import java.util.List;
 
 /**
  * Created by AndrewK on 12/4/2015.
@@ -42,18 +62,45 @@ public class MapsActivityTest extends ActivityInstrumentationTestCase2<MapsActiv
         /* Given I just opened up the app on my phone when I’m on the main activity page with the map
         then I should see pins in the locations of all buildings that have valid reports on them*/
         solo.assertCurrentActivity("Current Activity", MapsActivity.class);
+        //final GoogleMap mMap = ((SupportMapFragment)((FragmentActivity)solo.getCurrentActivity()).getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
         //when I click "Report a Problem" button then I am directed to the report page
-        solo.clickOnButton(R.id.toReport);
+        solo.clickOnButton("New Report");
         solo.assertCurrentActivity("Current Activity", MainActivity2Activity.class);
         /*when I fill in all the fields with valid input and click report then
         current page closes to main activity*/
-        solo.enterText(R.id.buildingName, "Center");
-        solo.enterText(R.id.roomNumber, "101");
-        solo.enterText(R.id.problem, "projector doesn't work");
-        solo.clickOnButton("report");
-        solo.assertCurrentActivity("Current Activity", MapsActivity.class);
+        solo.enterText((EditText)solo.getView(R.id.buildingName), "Center Hall");
+        solo.enterText((EditText)solo.getView(R.id.roomNumber), "101");
+        solo.enterText((EditText)solo.getView(R.id.problem), "projector doesn't work");
+        solo.clickOnButton("Report");
+        solo.waitForActivity(MapsActivity.class, 2000);
+        solo.assertCurrentActivity("Current Activity", MainActivity2Activity.class);
         /* when i am back on main activity page then map is refreshed with my report added to existing
         pin or new pin if necessary */
+        /*query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                if (e == null) {
+                    for (ParseObject entries : objects) {
+                        if(entries.getString("Building").equals("Center Hall")) {
+                            ParseGeoPoint geolocation = entries.getParseGeoPoint("Location");
+                            double latitude = geolocation.getLatitude();
+                            double longitude = geolocation.getLongitude();
+                            LatLng location = new LatLng(latitude, longitude);
+                            //Marker marker = new MarkerOptions(.position(location));
+
+                            //mMap.getBounds().contains(marker.getPosition());
+                        }
+                    }
+                } else {
+                    Log.d("data", "Error: " + e.getMessage());
+                }
+            }
+        });*/
+       /* and when I click on the pin where the building I reported is
+        then I should see an information label that shows all rooms for that building that have valid
+        reports on them
+        and when I click on the information label
+        then a new activity should come up with all the detailed reports for those rooms*/
 
 
     }
