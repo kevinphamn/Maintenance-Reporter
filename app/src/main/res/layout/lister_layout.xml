@@ -41,20 +41,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Confirm"
-        android:id="@+id/confirmButton"
+        android:id="@+id/theInvalidButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/fab_margin"
         android:layout_below="@+id/thePicture"
-        android:layout_alignLeft="@+id/theProblem"
-        android:layout_alignStart="@+id/theProblem" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Deny"
-        android:id="@+id/denyButton"
-        android:layout_below="@+id/thePicture"
-        android:layout_alignRight="@+id/theProblem"
-        android:layout_alignEnd="@+id/theProblem" />
-
-
+        android:text="Fixed/Erroneous Report"/>
 </RelativeLayout>

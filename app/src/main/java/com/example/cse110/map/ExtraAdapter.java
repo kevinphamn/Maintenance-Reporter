@@ -1,9 +1,13 @@
 package com.example.cse110.map;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
+import android.location.GpsStatus;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +17,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.parse.GetCallback;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -21,17 +24,16 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 public class ExtraAdapter extends ArrayAdapter<ParseObject> {
 
     private ArrayList<ParseObject> myObjects;
     private ArrayList<Boolean> canPress = new ArrayList<>();
-    private ParseFile photo = null;
+    private ParseFile photo;
     Bitmap bmp = null;
-    private Bitmap[] myList;
-    private Bitmap holder;
-    //private boolean canPress1 =true;
 
     public ExtraAdapter(Context context, int using, ArrayList<ParseObject> objects) {
         super(context, using, objects);
@@ -50,95 +52,93 @@ public class ExtraAdapter extends ArrayAdapter<ParseObject> {
         final ParseObject myObject = myObjects.get(position);
 
         if (myObject != null) {
-            bmp = null;
-            TextView theRoom = (TextView) emptyView.findViewById(R.id.theRoomNumber);
-            TextView theProblem = (TextView) emptyView.findViewById(R.id.theProblem);
-            final ImageView theImage = (ImageView) emptyView.findViewById(R.id.thePicture);
+            if(myObject.getInt("count") > -3) {
+                TextView theRoom = (TextView) emptyView.findViewById(R.id.theRoomNumber);
+                TextView theProblem = (TextView) emptyView.findViewById(R.id.theProblem);
+                final ImageView theImage = (ImageView) emptyView.findViewById(R.id.thePicture);
+                Button theInvalidButton = (Button) emptyView.findViewById(R.id.theInvalidButton);
+                canPress.add(true);
 
-            final Button confirm = (Button)emptyView.findViewById(R.id.confirmButton);
-            final Button deny = (Button)emptyView.findViewById(R.id.denyButton);
-            final ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("DataPoint");
-
-            canPress.add(true);
-
-            confirm.setOnClickListener(new View.OnClickListener(){
-
-                @Override
-                public void onClick(View v) {
-
-                    if(canPress.get(position)) {
-                        query.getInBackground(myObject.getObjectId(),new GetCallback<ParseObject>(){
-                            public void done(ParseObject obo, ParseException e) {
-                                if(e==null) {
-                                    obo.put("count", 0);
-                                    obo.saveInBackground();
+                theRoom.setText("Room Number: ");
+                theRoom.append((String) myObject.get("RoomNumber"));
+                theProblem.setText("Problem Description: ");
+                theProblem.append((String) myObject.get("reportDescription"));
+                photo = myObject.getParseFile("photo");
+                theImage.setImageDrawable(null);
+                if (photo != null) {
+                    photo.getDataInBackground(new GetDataCallback() {
+                        public void done(byte[] data, ParseException e) {
+                            if (e == null) {
+                                // Decode the Byte[] into bitmap
+                                bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
+                                // Set the Bitmap into the imageView
+                                if (bmp != null) {
+                                    theImage.setImageBitmap(bmp);
+                                    bmp = null;
                                 }
-
+                            } else {
+                                Log.d("test", "There was a problem downloading the data.");
                             }
-                        });
-                        confirm.setBackgroundColor(Color.parseColor("#D3D3D3"));
-                        deny.setBackgroundColor(Color.parseColor("#D3D3D3"));
-                        canPress.set(position,false);
-                    }
-                }
-            });
+                        }
 
-            deny.setOnClickListener(new View.OnClickListener(){
-
-                @Override
-                public void onClick(View v){
-                    if(canPress.get(position)){
-                        query.getInBackground(myObject.getObjectId(), new GetCallback<ParseObject>() {
-                            public void done(ParseObject obo, ParseException e) {
-                                if(e==null) {
-
-                                    obo.put("count", (int) myObject.get("count") - 1);
-                                    obo.saveInBackground();
-                                }
-
-                            }
-                        });
-                        confirm.setBackgroundColor(Color.parseColor("#D3D3D3"));
-                        deny.setBackgroundColor(Color.parseColor("#D3D3D3"));
-                        canPress.set(position,false);
-                    }
+                    });
+                } else {
+                    // Set image to the pic_unavailable drawable resource
+                    theImage.setImageResource(R.drawable.pic_unavailable);
                 }
 
-            });
+                theInvalidButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (canPress.get(position)) {
+                            ParseQuery<ParseObject> query = ParseQuery.getQuery("DataPoint");
+                            ParseObject object;
 
-            theRoom.setText("Room Number: ");
-            theRoom.append((String)myObject.get("RoomNumber"));
-            theProblem.setText("Problem Description: ");
-            theProblem.append((String) myObject.get("reportDescription"));
-            photo = myObject.getParseFile("photo");
-            theImage.setImageDrawable(null);
-            theImage.setVisibility(View.GONE);
-            if(photo != null) {
-                photo.getDataInBackground(new GetDataCallback() {
-                    public void done(byte[] data, ParseException e) {
-                        if (e == null) {
-                            // Decode the Byte[] into bitmap
-                            bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
-                            // Set the Bitmap into the imageView
-                            //if(bmp != null) {
-                            theImage.setImageBitmap(bmp);
-                            //}
-                            //myList[position] = bmp;
-                        } else {
-                            Log.d("test", "There was a problem downloading the data.");
+                            ConnectivityManager cm = (ConnectivityManager) getContext().
+                                    getSystemService(Context.CONNECTIVITY_SERVICE);
+                            NetworkInfo info = cm.getActiveNetworkInfo();
+                            if (info == null || !info.isConnectedOrConnecting()) {
+                                createAlert("Unable to Submit", "Unable to submit input. Try again later.");
+                                return;
+                            }
+
+                            try {
+                                object = query.get(myObject.getObjectId());
+                            } catch (ParseException e) {
+                                createAlert("Unable to Submit", "Unable to submit input. Try again later.");
+                                return;
+                            }
+
+                            object.put("count", (int) myObject.get("count") - 1);
+                            if(object.getInt("count") <= -3) {
+                                try {
+                                    object.delete();
+                                } catch (ParseException el) {}
+                            }
+                            object.saveEventually();
+                            createAlert("Submission Success", "Input Successful");
+                            canPress.set(position, false);
+                        }
+                        else{
+                            createAlert("Feedback Submitted", "Your feedback has already been submitted");
                         }
                     }
-
                 });
             }
-            else{
-                // Set image to the pic_unavailable drawable resource
-                theImage.setImageResource(R.drawable.pic_unavailable);
-            }
-            theImage.setVisibility(View.VISIBLE);
-
         }
 
         return emptyView;
+    }
+
+    private void createAlert(String title, String message){
+        AlertDialog dialog = new AlertDialog.Builder(getContext())
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
     }
 }
