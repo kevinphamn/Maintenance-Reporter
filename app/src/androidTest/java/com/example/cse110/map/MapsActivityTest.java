@@ -76,26 +76,8 @@ public class MapsActivityTest extends ActivityInstrumentationTestCase2<MapsActiv
         solo.assertCurrentActivity("Current Activity", MainActivity2Activity.class);
         /* when i am back on main activity page then map is refreshed with my report added to existing
         pin or new pin if necessary */
-        /*query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> objects, ParseException e) {
-                if (e == null) {
-                    for (ParseObject entries : objects) {
-                        if(entries.getString("Building").equals("Center Hall")) {
-                            ParseGeoPoint geolocation = entries.getParseGeoPoint("Location");
-                            double latitude = geolocation.getLatitude();
-                            double longitude = geolocation.getLongitude();
-                            LatLng location = new LatLng(latitude, longitude);
-                            //Marker marker = new MarkerOptions(.position(location));
 
-                            //mMap.getBounds().contains(marker.getPosition());
-                        }
-                    }
-                } else {
-                    Log.d("data", "Error: " + e.getMessage());
-                }
-            }
-        });*/
+        solo.clickOnButton("Center Hall");
        /* and when I click on the pin where the building I reported is
         then I should see an information label that shows all rooms for that building that have valid
         reports on them

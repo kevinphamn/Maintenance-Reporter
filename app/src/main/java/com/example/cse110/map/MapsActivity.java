@@ -39,6 +39,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+
         Button toReport = (Button) findViewById(R.id.toReport);
         toReport.setOnClickListener(new View.OnClickListener() {
 
